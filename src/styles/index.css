@@ -28,6 +28,7 @@ body {
   width: 100vw;
   height: 100vh;
   background: var(--color-bg);
+  overflow-x: hidden;
 }
 
 .container {
@@ -124,7 +125,6 @@ body {
   border-radius: 0.5rem;
 
   position: relative;
-  
 }
 
 .article--instructions::before,
@@ -158,7 +158,8 @@ body {
   display: none;
 }
 
-#container--score, #container--level {
+#container--score,
+#container--level {
   color: var(--color-black);
   width: 30rem;
   padding: var(--common-padding);
@@ -172,36 +173,32 @@ body {
 }
 
 #container--leaderboard {
-  height: 50%;
-  padding: var(--common-padding);
-  width: 50%;
+  height: 30%;
+  padding: 20px;
+  width: 20rem;
   margin-top: var(--common-margin);
-  aspect-ratio: 1 / 1.5;
   background: var(--color-primary);
   border-radius: 0.5rem;
-  overflow: scroll;
-  position: relative;
+  overflow-y: scroll;
   color: #ed6ea0;
   display: none;
 }
 
-.container--name{
+.container--name {
   display: none;
   flex-direction: row;
   align-items: center;
   color: var(--color-white);
 }
 
-#container--button-update-name{
+#container--button-update-name {
   display: none;
   margin-left: 20px;
   border-radius: var(--common-border-radius);
   outline: none;
   border: none;
   padding: var(--common-padding);
-
 }
-
 
 @keyframes rotation {
   0% {
@@ -211,4 +208,3 @@ body {
     --gradient-angle: 360deg;
   }
 }
-
