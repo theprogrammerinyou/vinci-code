@@ -107,20 +107,36 @@ function displayNumbers({ valueToBeShown }) {
 }
 
 function getLeaderboard() {
-  leaderContainer.style.display = "block";
-  const playerDetailsList = JSON.parse(localStorage.getItem("playersDetails"));
-  if (playerDetailsList) {
-    const playerScoresSorted = playerDetailsList.sort(
-      (a, b) => a.playerScore > b.playerScore
+  if (leaderContainer.style.display === "none") {
+    leaderContainer.style.display = "block";
+    const playerDetailsList = JSON.parse(
+      localStorage.getItem("playersDetails")
     );
-    playerScoresSorted.forEach((player, index) => {
-      const { playerName, playerScore } = player;
-      const node = document.createElement("p");
-      node.innerText = `${index + 1}. ${playerName} : ${playerScore}`;
-      leaderContainer.appendChild(node);
-    });
+    if (playerDetailsList) {
+      const playerScoresSorted = playerDetailsList.sort(
+        (a, b) => a.playerScore > b.playerScore
+      );
+      playerScoresSorted.forEach((player, index) => {
+        const { playerName, playerScore } = player;
+        const leaderboardText = `${index + 1}. ${playerName} : ${playerScore}`;
+
+        // Check if a paragraph with the same text content already exists
+        const existingNode = Array.from(
+          leaderContainer.getElementsByTagName("p")
+        ).find((p) => p.innerText === leaderboardText);
+        if (!existingNode) {
+          // If not, create a new paragraph and append it to the leaderContainer
+          const node = document.createElement("p");
+          node.innerText = leaderboardText;
+          leaderContainer.appendChild(node);
+        }
+      });
+    } else {
+      console.log("No details found");
+    }
   } else {
-    console.log("No details found");
+    leaderContainer.style.display = "none";
+    return;
   }
 }
 

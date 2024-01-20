@@ -115,7 +115,7 @@ body {
 }
 
 .article--instructions {
-  height: 50%;
+  height: 30%;
   padding: var(--common-padding);
   width: 50%;
   margin-top: var(--common-margin);
