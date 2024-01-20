@@ -148,8 +148,7 @@ body {
   filter: blur(3.5rem);
 }
 
-#container--numbers,
-#container--score {
+#container--numbers {
   color: var(--color-black);
   width: 30rem;
   padding: var(--common-padding);
@@ -157,6 +156,16 @@ body {
   background-color: var(--color-white);
   display: none;
 }
+
+#container--score, #container--level {
+  color: var(--color-black);
+  width: 30rem;
+  padding: var(--common-padding);
+  border-radius: var(--common-border-radius);
+  background-color: var(--color-white);
+  margin-top: var(--common-margin);
+}
+
 
 @keyframes rotation {
   0% {

@@ -3,6 +3,7 @@ const inputField = document.getElementById("container--input");
 const numbersContainer = document.getElementById("container--numbers");
 const scoreContainer = document.getElementById("container--score");
 const leaderboardBtn = document.getElementById("container--button-leaderboard");
+const levelContainer = document.getElementById("container--level");
 
 let score = 0;
 let level = 1;
@@ -15,8 +16,9 @@ function resetState() {
   enteredNumbers = [];
   inputField.value = "";
   startBtn.textContent = "Start Game";
-  startBtn.removeEventListener("click", startGame);
-  leaderboardBtn.removeEventListener("click", getLeaderboard);
+  inputField.placeholder = "Please enter your name to start the game";
+  score = 0;
+  level = 1;
 }
 
 function generateRandomNumbers() {
@@ -30,10 +32,7 @@ function getRandomNumbersList() {
 }
 
 function endGame() {
-  console.log('ending game');
-  scoreContainer.style.display = "block";
-  scoreContainer.innerHTML = `<p>Your score is ${score}</p>`;
-  console.log('score container', {scoreContainer, score});
+  scoreContainer.innerText = `Your score is ${score}`;
 }
 
 function verifyLevel() {
@@ -44,6 +43,8 @@ function verifyLevel() {
 
   isUserInput = false;
   if (isCorrect) {
+    score = level;
+    level += 1;
     const user = localStorage.getItem("currentUserName");
     const playersDetails = {
       playerName: user,
@@ -52,8 +53,6 @@ function verifyLevel() {
     };
     localStorage.setItem("playersDetails", JSON.stringify(playersDetails));
     localStorage.removeItem("currentUserName");
-    score = level;
-    level += 1;
     generatedNumbers = [];
     enteredNumbers = [];
     getRandomNumbersList();
@@ -69,7 +68,6 @@ function checkUserInput() {
   enteredNumbers.push(inputValue);
   inputField.value = "";
   isUserInput = true;
-  console.log("entered numbers", enteredNumbers);
   if (enteredNumbers.length === generatedNumbers.length) {
     verifyLevel();
   } else if (enteredNumbers.length < generatedNumbers.length) {
@@ -81,11 +79,9 @@ function getUserInput() {
   inputField.placeholder = "Please enter the number shown";
   startBtn.textContent = "Enter Number";
   isUserInput = true;
-  console.log("get user input");
 }
 
 function displayNumbers({ valueToBeShown }) {
-  console.log("value to be shown", valueToBeShown);
   if (valueToBeShown < level) {
     numbersContainer.style.display = "block";
     numbersContainer.innerHTML = `Generated Number: ${generatedNumbers[valueToBeShown]}`;
@@ -94,7 +90,6 @@ function displayNumbers({ valueToBeShown }) {
       displayNumbers({ valueToBeShown: valueToBeShown + 1 });
     }, 2000);
   } else {
-    console.log("in display numbers else");
     numbersContainer.style.display = "none";
     getUserInput();
   }
@@ -113,15 +108,14 @@ function getLeaderboard() {
 }
 
 function startGame() {
+  levelContainer.innerHTML = `Your level is: ${level}`;
   if (isUserInput) {
     checkUserInput();
-    scoreContainer.style.display = "none";
   } else {
     localStorage.setItem("currentUserName", inputField.value);
     inputField.value = "";
     getRandomNumbersList();
     displayNumbers({ valueToBeShown: 0 });
-    scoreContainer.style.display = "none";
   }
 }
 

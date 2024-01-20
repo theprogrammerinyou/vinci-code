@@ -8,13 +8,18 @@
   </head>
   <body>
     <main class="container">
-      <div id="container--score">
-        <p>Random number</p>
-      </div>
       <h2 class="title">Welcome to Vinci Code - Lets have some fun</h2>
 
+      <div id="container--level">
+        Your level is 1
+      </div>
+
       <div class="container--game">
-        <input font-size: 62.5%; type="text" id="container--input" />
+        <input
+          placeholder="Please enter your name to start the game"
+          type="text"
+          id="container--input"
+        />
         <div class="container--button">
           <button type="submit" id="container--button-start">Start Game</button>
           <button type="submit" id="container--button-leaderboard">
@@ -24,6 +29,7 @@
       </div>
 
       <div id="container--numbers"></div>
+      <div id="container--score"></div>
 
       <article class="article--instructions">
         <h2 class="title">Instructions</h2>
