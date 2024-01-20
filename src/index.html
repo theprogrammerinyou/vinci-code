@@ -1,20 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="./assets/index.css" rel="stylesheet" />
     <title>Vinci Code</title>
-</head>
-<body>
+  </head>
+  <body>
     <main class="container">
-        <h2 class="container--title">Welcome to Vinci Code - Lets have some fun</h1>
-        <div class="container--game">
-            <input type="text" id="container--input" placeholder="Please enter your name to start" />
-            <button type="submit" id="container--button-start">Start Game</button>
+      <h2 class="title">Welcome to Vinci Code - Lets have some fun</h2>
+      <div class="container--game">
+        <input font-size: 62.5%; type="text" id="container--input" />
+        <div class="container--button">
+          <button type="submit" id="container--button-start">Start Game</button>
+          <button type="submit" id="container--button-leaderboard">
+            Leaderboard
+          </button>
         </div>
+      </div>
+
+      <div id="container--numbers"></div>
+      <div id="container--score">
+        <p>Random Number</p>
+      </div>
+
+      <article class="article--instructions">
+        <h2 class="title">Instructions</h2>
+        <section>
+          <ol>
+            <li>
+              Once the game is started, you will be shown a number at once.
+              Remember the number
+            </li>
+            <li>
+              In the next step, input the number and click submit, if the number
+              you have entered is right, you will be shown 2 number
+            </li>
+            <li>
+              Now remember both the numbers and input one after the other,
+              remember to click submit after entering each number
+            </li>
+            <li>
+              Once done, and if your inputs are correct, you will be shown
+              further numbers.
+            </li>
+            <li>
+              The number of numbers to be shown will depend on the level you
+              are, level 1 would have 1 number, level 2 will have 2 numbers,
+              level 3 will have 3 numbers shown respectively.
+            </li>
+            <li>
+              Once you input the incorrect number, your score will be shown on
+              screen, along with leaderboard.
+            </li>
+            <li>
+              You can check leaderboard before starting the game, or after the
+              game.
+            </li>
+            <li>You can also update your name, by clicking on update name</li>
+          </ol>
+        </section>
+      </article>
     </main>
     <script src="index.mjs"></script>
-</body>
+  </body>
 </html>
-
