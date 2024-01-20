@@ -24,14 +24,16 @@ function generateRandomNumbers() {
 }
 
 function getRandomNumbersList() {
-  for (let i = 0; i <= level; i++) {
+  for (let i = 0; i < level; i++) {
     generatedNumbers.push(generateRandomNumbers());
   }
 }
 
 function endGame() {
+  console.log('ending game');
   scoreContainer.style.display = "block";
   scoreContainer.innerHTML = `<p>Your score is ${score}</p>`;
+  console.log('score container', {scoreContainer, score});
 }
 
 function verifyLevel() {
@@ -50,8 +52,8 @@ function verifyLevel() {
     };
     localStorage.setItem("playersDetails", JSON.stringify(playersDetails));
     localStorage.removeItem("currentUserName");
-    level++;
     score = level;
+    level += 1;
     generatedNumbers = [];
     enteredNumbers = [];
     getRandomNumbersList();
@@ -84,7 +86,7 @@ function getUserInput() {
 
 function displayNumbers({ valueToBeShown }) {
   console.log("value to be shown", valueToBeShown);
-  if (valueToBeShown <= level) {
+  if (valueToBeShown < level) {
     numbersContainer.style.display = "block";
     numbersContainer.innerHTML = `Generated Number: ${generatedNumbers[valueToBeShown]}`;
     setTimeout(() => {
