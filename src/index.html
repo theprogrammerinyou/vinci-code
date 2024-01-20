@@ -3,18 +3,21 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="./assets/index.css" rel="stylesheet" />
+    <link href="./styles/index.css" rel="stylesheet" />
     <title>Vinci Code</title>
   </head>
+
   <body>
     <main class="container">
       <h2 class="title">Welcome to Vinci Code - Lets have some fun</h2>
-
-      <div id="container--level">
-        Your level is 1
-      </div>
-
       <div class="container--game">
+        <div class="container--name" id="container--name">
+          <p id="container--p-name"></p>
+          <button type="submit" id="container--button-update-name">
+            Update Name
+          </button>
+        </div>
+        <div id="container--level">You are at level: 1</div>
         <input
           placeholder="Please enter your name to start the game"
           type="text"
@@ -30,10 +33,11 @@
 
       <div id="container--numbers"></div>
       <div id="container--score"></div>
+      <div id="container--leaderboard"></div>
 
       <article class="article--instructions">
         <h2 class="title">Instructions</h2>
-        <section>
+        <section class="instruction">
           <ol>
             <li>
               Once the game is started, you will be shown a number at once.

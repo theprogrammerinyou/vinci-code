@@ -116,7 +116,7 @@ body {
 .article--instructions {
   height: 50%;
   padding: var(--common-padding);
-  width: 30%;
+  width: 50%;
   margin-top: var(--common-margin);
   color: var(--color-white);
   aspect-ratio: 1 / 1.5;
@@ -124,6 +124,7 @@ body {
   border-radius: 0.5rem;
 
   position: relative;
+  
 }
 
 .article--instructions::before,
@@ -166,6 +167,41 @@ body {
   margin-top: var(--common-margin);
 }
 
+#container--score {
+  display: none;
+}
+
+#container--leaderboard {
+  height: 50%;
+  padding: var(--common-padding);
+  width: 50%;
+  margin-top: var(--common-margin);
+  aspect-ratio: 1 / 1.5;
+  background: var(--color-primary);
+  border-radius: 0.5rem;
+  overflow: scroll;
+  position: relative;
+  color: #ed6ea0;
+  display: none;
+}
+
+.container--name{
+  display: none;
+  flex-direction: row;
+  align-items: center;
+  color: var(--color-white);
+}
+
+#container--button-update-name{
+  display: none;
+  margin-left: 20px;
+  border-radius: var(--common-border-radius);
+  outline: none;
+  border: none;
+  padding: var(--common-padding);
+
+}
+
 
 @keyframes rotation {
   0% {
@@ -175,3 +211,4 @@ body {
     --gradient-angle: 360deg;
   }
 }
+

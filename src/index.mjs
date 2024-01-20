@@ -4,6 +4,10 @@ const numbersContainer = document.getElementById("container--numbers");
 const scoreContainer = document.getElementById("container--score");
 const leaderboardBtn = document.getElementById("container--button-leaderboard");
 const levelContainer = document.getElementById("container--level");
+const leaderContainer = document.getElementById("container--leaderboard");
+const nameContainer = document.getElementById("container--name");
+const updateNameBtn = document.getElementById("container--button-update-name");
+const namePara = document.getElementById("container--p-name");
 
 let score = 0;
 let level = 1;
@@ -32,7 +36,19 @@ function getRandomNumbersList() {
 }
 
 function endGame() {
+  scoreContainer.style.display = "block";
   scoreContainer.innerText = `Your score is ${score}`;
+  const user = localStorage.getItem("currentUserName");
+  const oldPlayerDetails =
+    JSON.parse(localStorage.getItem("playersDetails")) || [];
+  const playersDetails = {
+    playerName: user,
+    playerScore: score,
+    playerLevel: level,
+  };
+  const updatedPlayerDetails = [...oldPlayerDetails, playersDetails];
+  localStorage.setItem("playersDetails", JSON.stringify(updatedPlayerDetails));
+  localStorage.removeItem("currentUserName");
 }
 
 function verifyLevel() {
@@ -45,14 +61,6 @@ function verifyLevel() {
   if (isCorrect) {
     score = level;
     level += 1;
-    const user = localStorage.getItem("currentUserName");
-    const playersDetails = {
-      playerName: user,
-      playerScore: score,
-      playerLevel: level,
-    };
-    localStorage.setItem("playersDetails", JSON.stringify(playersDetails));
-    localStorage.removeItem("currentUserName");
     generatedNumbers = [];
     enteredNumbers = [];
     getRandomNumbersList();
@@ -83,36 +91,55 @@ function getUserInput() {
 
 function displayNumbers({ valueToBeShown }) {
   if (valueToBeShown < level) {
+    startBtn.disabled = true;
     numbersContainer.style.display = "block";
     numbersContainer.innerHTML = `Generated Number: ${generatedNumbers[valueToBeShown]}`;
     setTimeout(() => {
+      startBtn.disabled = true;
       numbersContainer.innerHTML = "";
       displayNumbers({ valueToBeShown: valueToBeShown + 1 });
     }, 2000);
   } else {
+    startBtn.disabled = false;
     numbersContainer.style.display = "none";
     getUserInput();
   }
 }
 
 function getLeaderboard() {
+  leaderContainer.style.display = "block";
   const playerDetailsList = JSON.parse(localStorage.getItem("playersDetails"));
   if (playerDetailsList) {
     const playerScoresSorted = playerDetailsList.sort(
       (a, b) => a.playerScore > b.playerScore
     );
-    console.log("player score", playerScoresSorted);
+    playerScoresSorted.forEach((player, index) => {
+      const { playerName, playerScore } = player;
+      const node = document.createElement("p");
+      node.innerText = `${index + 1}. ${playerName} : ${playerScore}`;
+      leaderContainer.appendChild(node);
+    });
   } else {
     console.log("No details found");
   }
 }
 
+function updateName() {
+  isUserInput = false;
+  startBtn.textContent = "Update Name and Start Game";
+  inputField.placeholder = "Please enter your name to start the game";
+}
+
 function startGame() {
-  levelContainer.innerHTML = `Your level is: ${level}`;
+  levelContainer.innerHTML = `You are at level: ${level}`;
+  leaderContainer.style.display = "none";
   if (isUserInput) {
     checkUserInput();
   } else {
     localStorage.setItem("currentUserName", inputField.value);
+    namePara.innerText = `Hi ${inputField.value} `;
+    nameContainer.style.display = "flex";
+    updateNameBtn.style.display = "block";
     inputField.value = "";
     getRandomNumbersList();
     displayNumbers({ valueToBeShown: 0 });
@@ -120,5 +147,7 @@ function startGame() {
 }
 
 leaderboardBtn.addEventListener("click", getLeaderboard);
+
+updateNameBtn.addEventListener("click", updateName);
 
 startBtn.addEventListener("click", startGame);
